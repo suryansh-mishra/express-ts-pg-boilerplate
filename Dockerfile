@@ -16,7 +16,7 @@ FROM redis:latest as redis
 EXPOSE 6379
 
 # Step 3: Set up Node.js 22 container
-FROM node:22 as myapp
+FROM node:22.11-alpine3.20 as myapp
 
 # Set the working directory in the container
 WORKDIR /app
@@ -28,8 +28,11 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
+ARG GIT_COMMIT
+ENV GIT_COMMIT=$GIT_COMMIT
+
 # Expose the port for the Node.js server (assuming 3000 here)
 EXPOSE 3000
 
 # Run the Node.js server
-CMD ["tsx"]
+CMD ["npm", "run", "dev"]

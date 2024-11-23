@@ -8,7 +8,11 @@ const envSchema = z.object({
     .enum(['development', 'production', 'test'])
     .default('development'),
   PORT: z.string().default('4000'),
-  DATABASE_URL: z.string(),
+  DATABASE_HOST: z.string().default('localhost'),
+  DATABASE_USER: z.string().default('postgres'),
+  DATABASE_PASSWORD: z.string().default('postgres'),
+  DATABASE_NAME: z.string().default('postgres'),
+  DATABASE_PORT: z.string().default('5432'),
   JWT_SECRET: z.string(),
   JWT_EXPIRES_IN: z.string().default('7d'),
 });
