@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "ES2023",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "moduleResolution": "nodenext",
+    "verbatimModuleSyntax": true,
+    // Best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": ".",
+    "plugins": [
+      //something
+      { "transform": "trans-with-mapping", "resolvePathAliases": true }
+    ],
+    "paths": {
+      "@/*": ["src/*"],
+      "@lib/*": ["src/lib/*"],
+      "@config/*": ["src/config/*"],
+      "@routes/*": ["src/routes/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@models/*": ["src/models/*"]
+    },
+
+    // Some stricter flags (disabled by default)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false
+  },
+  "include": ["src/**/*", "server.ts"],
+  "exclude": ["node_modules"]
+}
