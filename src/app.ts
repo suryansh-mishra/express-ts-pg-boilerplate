@@ -1,8 +1,4 @@
-import express, {
-  type NextFunction,
-  type Request,
-  type Response,
-} from 'express';
+import express, { type Request, type Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -38,7 +34,7 @@ app.use(
  * @route GET /api/v1/ping
  * @returns {ApiResponse} A simple 'pong' message with a 200 status.
  */
-const ping = catchError((_: Request, res: Response, next: NextFunction) => {
+const ping = catchError((_: Request, res: Response) => {
   return new ApiResponse(res, 200).message('alive').send();
 });
 

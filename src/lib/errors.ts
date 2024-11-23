@@ -11,10 +11,12 @@ enum AppErrorCodes {
 }
 
 class AppError extends Error {
-  public appErrorCode: string;
+  public appErrorCode: AppErrorCodes;
+
   constructor(errCode: AppErrorCodes, message?: string) {
     super(message || errCode);
-    this.appErrorCode = errCode || AppErrorCodes.APP_ERROR;
+    this.appErrorCode = errCode;
+    Object.setPrototypeOf(this, new.target.prototype);
     Error.captureStackTrace(this, this.constructor);
   }
 }

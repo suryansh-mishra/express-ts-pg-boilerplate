@@ -8,7 +8,7 @@ const validateReqBody = (schema: ZodSchema) => {
     try {
       schema.parse(req.body);
       next();
-    } catch (error: any) {
+    } catch (_) {
       throw new AppError(AppErrorCodes.BAD_REQUEST, 'invalid request body');
     }
   });

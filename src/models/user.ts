@@ -5,7 +5,7 @@ import { UserRoles, type User as UserType } from '@/types/user.js';
 
 export interface UserSchema extends UserType, Document {}
 
-const UserSchema: Schema<UserSchema> = new Schema(
+const UserSchema = new Schema<UserSchema>(
   {
     role: {
       type: String,

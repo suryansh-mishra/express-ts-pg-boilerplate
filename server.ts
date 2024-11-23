@@ -7,7 +7,6 @@
 import env from '@config/env.js';
 import app from '@/app.js'; // Import the application instance
 import logger from '@config/logger.js';
-import db from '@config/database.js';
 
 if (!env.success) {
   logger.error(
@@ -25,6 +24,7 @@ const server = app.listen(PORT, () => {
 });
 
 // Global error handler for uncaught exceptions
+// eslint-disable-next-line
 process.on('uncaughtException', (error: any) => {
   if (error && error.code === 'EADDRINUSE') {
     logger.error(

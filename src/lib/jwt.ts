@@ -1,7 +1,6 @@
 import type { Request } from 'express';
 import jwt, { type JwtPayload, type Secret } from 'jsonwebtoken';
 import { AppError, AppErrorCodes } from '@lib/errors.js';
-import type { UserRoles } from '@/types/user.js';
 
 /**
  * Signs a new JWT token with the provided payload.
@@ -35,7 +34,7 @@ const validate = (
   let decoded: JwtPayload;
   try {
     decoded = jwt.verify(token, secret) as JwtPayload;
-  } catch (error) {
+  } catch (_) {
     throw new AppError(AppErrorCodes.UNAUTHORIZED, 'invalid jwt');
   }
 

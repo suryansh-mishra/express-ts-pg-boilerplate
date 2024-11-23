@@ -41,6 +41,7 @@ class _BaseApiResponse<T = undefined> {
   // Finalize and send the response
   public send() {
     if (this._response.headersSent) return; // Prevent duplicate sends
+    // eslint-disable-next-line
     const responseBody: Record<string, any> = { status: this._status };
     if (this._message) responseBody['message'] = this._message || null;
     if (this._data !== undefined) responseBody['data'] = this._data;
