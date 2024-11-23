@@ -1,2 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/h"
+
+# Run ESLint and log output to a file
+npx eslint . --fix > husky-log.txt 2>&1
