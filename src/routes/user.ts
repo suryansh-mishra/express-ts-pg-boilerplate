@@ -8,6 +8,7 @@ const router = Router();
  * @desc Register a new user
  */
 router.post('/register', register);
+router.post('/oauth', register);
 router.post('/login', login);
 
 export default router;

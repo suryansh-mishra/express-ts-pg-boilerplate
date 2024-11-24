@@ -17,7 +17,7 @@ class AppError extends Error {
     super(message || errCode);
     this.appErrorCode = errCode;
     Object.setPrototypeOf(this, new.target.prototype);
-    Error.captureStackTrace(this, this.constructor);
+    // Error.captureStackTrace(this, this.constructor);
   }
 }
 

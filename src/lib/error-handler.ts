@@ -3,13 +3,26 @@ import { AppError, AppErrorCodes } from './errors.js';
 import { ApiErrorResponse } from './responses.js';
 import logger from '@config/logger.js';
 
-type RequestHandler = (req: Request, res: Response, next: NextFunction) => void;
+/* eslint-disable */
+const bubbleError = <T>(fn: (...args: any[]) => Promise<T>) => {
+  return async (...args: any[]): Promise<T> => {
+    try {
+      return await fn(...args);
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+/* eslint-enable */
 
-const catchError = (func: RequestHandler) => {
+type ControllerFunc = (req: Request, res: Response, next: NextFunction) => void;
+
+const catchError = (func: ControllerFunc) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       await func(req, res, next); // Await the async function to catch errors.
     } catch (error) {
+      console.log(error);
       next(error); // Pass error to GlobalErrorHandler.
     }
   };
@@ -18,7 +31,9 @@ const catchError = (func: RequestHandler) => {
 const GlobalErrorHandler = (
   err: Error | AppError,
   _: Request,
-  res: Response
+  res: Response,
+  // eslint-disable-next-line
+  next: NextFunction
 ) => {
   // Log the error in development or non-production environments
   if (process.env.NODE_ENV !== 'production') {
@@ -65,4 +80,4 @@ const GlobalErrorHandler = (
   }
 };
 
-export { GlobalErrorHandler, catchError };
+export { GlobalErrorHandler, catchError, bubbleError };

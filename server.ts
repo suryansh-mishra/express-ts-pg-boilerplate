@@ -7,6 +7,7 @@
 import env from '@config/env.js';
 import app from '@/app.js'; // Import the application instance
 import logger from '@config/logger.js';
+import { checkDBConnection } from '@config/database.js';
 
 if (!env.success) {
   logger.error(
@@ -15,6 +16,8 @@ if (!env.success) {
   );
   process.exit(1);
 }
+
+checkDBConnection();
 
 const PORT = process.env.PORT;
 

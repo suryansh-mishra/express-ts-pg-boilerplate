@@ -18,4 +18,5 @@ export default defineConfig({
   dbCredentials: {
     url: process.env.DATABASE_URL || DB_CONNECTION_URL, // Use the DATABASE_URL from .env if available, otherwise use the dynamically created URL
   },
+  casing: 'snake_case',
 });
